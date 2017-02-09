@@ -1292,6 +1292,17 @@ class TestCephDiskDeactivateAndDestroy(unittest.TestCase):
             self.assertRaises(Exception, main._deallocate_osd_id,
                               cluster, osd_id)
 
+    def test_main_fix(self):
+        args = main.parse_args(['fix', '--all', '--selinux', '--permissions'])
+        with patch.multiple(
+                main,
+                command=lambda x: ("", "", None),
+                command_init=lambda x: None,
+                command_wait=lambda x: None,
+            ):
+            main.main_fix(args)
+
+
 
 def raise_command_error(*args):
     e = subprocess.CalledProcessError('aaa', 'bbb', 'ccc')
