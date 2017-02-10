@@ -26,7 +26,7 @@ Where:
 ``k={data chunks}``
 
 :Description: Each object is split in **data-chunks** parts,
-              each stored on a different OSD.
+              each stored a different failure domain.
 
 :Type: Integer
 :Required: No.
@@ -35,8 +35,9 @@ Where:
 ``m={coding-chunks}``
 
 :Description: Compute **coding chunks** for each object and store them
-              on different OSDs. The number of coding chunks is also
-              the number of OSDs that can be down without losing data.
+              in different failure domains. The number of coding chunks
+              is also the number of OSDs that can be down without losing
+              data.
 
 :Type: Integer
 :Required: No.
