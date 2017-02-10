@@ -3,16 +3,16 @@ Locally repairable erasure code plugin
 ======================================
 
 With the *jerasure* plugin, when an erasure coded object is stored on
-multiple OSDs, recovering from the loss of one OSD requires reading
-from all the others. For instance if *jerasure* is configured with
-*k=8* and *m=4*, losing one OSD requires reading from the eleven
+multiple OSDs, recovering from the loss of one failure domain requires
+reading from all the others. For instance if *jerasure* is configured with
+*k=8* and *m=4*, losing one failure domain requires reading from the eleven
 others to repair.
 
 The *lrc* erasure code plugin creates local parity chunks to be able
-to recover using less OSDs. For instance if *lrc* is configured with
-*k=8*, *m=4* and *l=4*, it will create an additional parity chunk for
-every four OSDs. When a single OSD is lost, it can be recovered with
-only four OSDs instead of eleven.
+to recover using less failure domains. For instance if *lrc* is
+configured with *k=8*, *m=4* and *l=4*, it will create an additional
+parity chunk for every four failure domains. When a single failure domain
+is lost, it can be recovered with only four failure domains instead of eleven.
 
 Erasure code profile examples
 =============================
@@ -66,7 +66,7 @@ Where:
 ``k={data chunks}``
 
 :Description: Each object is split in **data-chunks** parts,
-              each stored on a different OSD.
+              each stored in a different failure domain.
 
 :Type: Integer
 :Required: Yes.
@@ -75,8 +75,9 @@ Where:
 ``m={coding-chunks}``
 
 :Description: Compute **coding chunks** for each object and store them
-              on different OSDs. The number of coding chunks is also
-              the number of OSDs that can be down without losing data.
+              in different failure domains. The number of coding chunks
+              is also the number of failure domains that can be down
+              without losing data.
 
 :Type: Integer
 :Required: Yes.
